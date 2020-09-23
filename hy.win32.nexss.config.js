@@ -2,7 +2,10 @@
 process.env.PYTHONIOENCODING = "UTF-8";
 // process.env.PYTHONOPTIMIZE = 1;
 
-let languageConfig = Object.assign({}, require("../config.win32"));
+let languageConfig = Object.assign(
+  {},
+  require(`../config.${process.platform}`)
+);
 languageConfig.title = "Hy";
 languageConfig.description = "Hy is a Lisp dialect that’s embedded in Python";
 languageConfig.url = "https://docs.hylang.org";
