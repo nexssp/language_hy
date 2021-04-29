@@ -17,6 +17,11 @@ ${sudo}python3 -m pip install hy`,
 };
 
 switch (distName) {
+  case os.distros.ALPINE:
+    languageConfig.compilers.hy.install = os.replacePMByDistro(
+      `${sudo}apt install -y musl-dev py3-pip python3-dev && ${sudo}pip3 install hy`
+    );
+    break;
   // case os.distros.ARCH:
   //   languageConfig.compilers.hy.install =
   //     "pacman -S --noconfirm python & python -m pip install hy"; // error: package org.json does not exist

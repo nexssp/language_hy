@@ -1,8 +1,7 @@
 let languageConfig = Object.assign({}, require("./hy.win32.nexss.config"));
-const os = require("@nexssp/os");
 
-const sudo = os.sudo();
-const distName = os.name();
+const sudo = process.sudo;
+const distName = process.distro;
 
 languageConfig.dist = distName;
 languageConfig.compilers = {
