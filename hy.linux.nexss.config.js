@@ -1,9 +1,9 @@
 let languageConfig = Object.assign({}, require("./hy.win32.nexss.config"));
-const os = require(`${process.env.NEXSS_SRC_PATH}/node_modules/@nexssp/os/`);
-const distName = os.name();
-languageConfig.dist = distName;
 
-const sudo = os.sudo();
+const sudo = process.sudo;
+
+const distName = process.distro;
+languageConfig.dist = distName;
 
 languageConfig.compilers = {
   hy: {
@@ -17,8 +17,8 @@ ${sudo}python3 -m pip install hy`,
 };
 
 switch (distName) {
-  case os.distros.ALPINE:
-    languageConfig.compilers.hy.install = os.replacePMByDistro(
+  case process.distros.ALPINE:
+    languageConfig.compilers.hy.install = process.replacePMByDistro(
       `${sudo}apt install -y musl-dev py3-pip python3-dev && ${sudo}pip3 install hy`
     );
     break;
@@ -26,14 +26,14 @@ switch (distName) {
   //   languageConfig.compilers.hy.install =
   //     "pacman -S --noconfirm python & python -m pip install hy"; // error: package org.json does not exist
   //   break;
-  case os.distros.UBUNTU:
-    languageConfig.compilers.hy.install = os.replacePMByDistro(
+  case process.distros.UBUNTU:
+    languageConfig.compilers.hy.install = process.replacePMByDistro(
       `${sudo}apt install -y python3-dev && ` +
         languageConfig.compilers.hy.install
     );
     break;
   default:
-    languageConfig.compilers.hy.install = os.replacePMByDistro(
+    languageConfig.compilers.hy.install = process.replacePMByDistro(
       languageConfig.compilers.hy.install
     );
     break;
