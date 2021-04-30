@@ -7,7 +7,7 @@
 ; Get values below
 ; (print (.get parsedJson "x"))
 
-(assoc parsedJson "test" "test")
+(assoc parsedJson "Hello from Hy! Python version:" (.python_version platform))
 
 (setv NexssStdout (.encode (.dumps json parsedJson) "utf8" "surrogateescape"))
 
